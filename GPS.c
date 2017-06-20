@@ -10,7 +10,7 @@ al momento de crearlo o destruirlo
 status_t GPS_crear(sensor_t** sens,sensor_type_t tpe, int sub_id){
 	if (!sens)
 	{
-		return ST_SUCCESS;
+		return ST_OK;
 	}
 	if ( (*sens = (sensor_t*)malloc(sizeof(sensor_t))) == NULL )
 	{

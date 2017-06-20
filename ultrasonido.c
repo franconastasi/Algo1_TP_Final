@@ -8,7 +8,7 @@
 status_t US_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr){
 	if (!sens || !param_ptr)
 	{
-		return ST_SUCCESS;
+		return ST_OK;
 	}
 	if ( (*sens = (sensor_t*)calloc(1,sizeof(sensor_t))) == NULL )
 	{

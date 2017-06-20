@@ -13,7 +13,7 @@ status_t lista_crear(lista_t *pl){
 	}
 
 	*pl = NULL;
-	return ST_SUCCESS;
+	return ST_OK;
 }
 
 status_t lista_crear_nodo(nodo_t** nodo, void* dato){
@@ -26,7 +26,7 @@ status_t lista_crear_nodo(nodo_t** nodo, void* dato){
 	}
 	(*nodo)->sig = NULL;
 	(*nodo)->dato = dato;
-	return ST_SUCCESS;
+	return ST_OK;
 }
 
 void lista_destruir_nodo(nodo_t** nodo, void (*destruir_nodo)(void*)){
@@ -60,7 +60,7 @@ status_t lista_insertar_final(lista_t* pl, void* dato){
 	{
 		return ST_ILLEGAL;
 	}
-	if( (st = lista_crear_nodo(&aux,dato)) != ST_SUCCESS ){
+	if( (st = lista_crear_nodo(&aux,dato)) != ST_OK ){
 		return st;
 	}
 
@@ -74,7 +74,7 @@ status_t lista_insertar_final(lista_t* pl, void* dato){
 		}	
 		last->sig = aux;
 	}
-	return ST_SUCCESS;
+	return ST_OK;
 }
 
 

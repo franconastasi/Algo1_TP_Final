@@ -22,7 +22,7 @@ typedef enum {
 
 
 typedef enum {
-	ST_SUCCESS,
+	ST_OK,
 	ST_NO_MEM,
 	ST_NULL_POINTER
 }status_t;
