@@ -18,13 +18,13 @@ typedef enum{
 typedef enum {
 	FALSE;
 	TRUE;
-}bool_t; 
+}bool_t;
 
 
 typedef enum {
 	ST_SUCCESS,
-	ST_ILLEGAL,
-	ST_NO_MEM
+	ST_NO_MEM,
+	ST_NULL_POINTER
 }status_t;
 
 typedef unsigned char uchar;
