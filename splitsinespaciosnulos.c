@@ -13,17 +13,16 @@ typedef enum{
 char** split (const char *s, char delim, size_t *fields,status_t* st);
 char* strdup (const char *str);
 
-char** split (const char *s, char delim, size_t *fields,status_t* st){
+char** split (const char *s, char delim, size_t *cant_fields,status_t* st){
 
 	char **csvfields,**aux;
 	int i,j=0,n=1;
 	char* dup;
 
-	if (fields==NULL){
+	if (cant_fields==NULL){
 		*st=ST_NULL_POINTER;
 		return NULL;
 	}
-
 
 	if (s==NULL){
 		*st=ST_NULL_POINTER;
@@ -33,7 +32,7 @@ char** split (const char *s, char delim, size_t *fields,status_t* st){
 
 	if((dup=strdup(s))==NULL){
 		*st=ST_NO_MEM;
-		*fields=0;
+		*cant_fields=0;
 		return NULL;
 	}
 
@@ -63,7 +62,7 @@ char** split (const char *s, char delim, size_t *fields,status_t* st){
 
 		}
 	}
-	*fields=n;
+	*cant_fields=n;
 	*st=ST_OK;
 	return csvfields;
 }

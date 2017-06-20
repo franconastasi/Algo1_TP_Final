@@ -10,7 +10,7 @@ status_t US_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_p
 	{
 		return ST_SUCCESS;
 	}
-	if ( (*sens = (sensor_t*)malloc(sizeof(sensor_t))) == NULL )
+	if ( (*sens = (sensor_t*)calloc(1,sizeof(sensor_t))) == NULL )
 	{
 		return ST_NO_MEM;
 	}
@@ -27,12 +27,15 @@ void US_destruir(sensor_t** sens){
 	*sens = NULL;
 }
 
+
+
+
 mensaje_t* US_adquirir_datos(sensor_t* sens){
 	/* Hay que preguntar si esta función tiene que
 	llevar un parámetro más: status_t st para notificar si hubo un error*/
 	mensaje_t* mensaje;
 	srand(time(NULL));
-	size_t i; 
+	size_t i;
 
 	mensaje = (mensaje_t*)malloc(sizeof(mensaje_t));
 	/*según tutorials point rand() devuelve un número entre 0 y MAX,
@@ -45,7 +48,7 @@ mensaje_t* US_adquirir_datos(sensor_t* sens){
 	*/
 	mensaje->largo = (rand() % (sizeof(char)*8))
 
-	/*Se podría agregar los parámetros en el cálculo de los datos para que parezca mas real 
+	/*Se podría agregar los parámetros en el cálculo de los datos para que parezca mas real
 	aunque no debería cambiar en nada la simulación
 	*/
 	mensaje_t->datos = (uchar*)malloc(sizeof(uchar)*mensaje->largo);
