@@ -13,24 +13,6 @@ typedef enum{
 char** split (const char *s, char delim, size_t *fields,status_t* st);
 char* strdup (const char *str);
 
-int main(){
-	char** lala;
-	char* cadena="HOLA,COMO,,,,,,,ESTAS,error?,,,,valgrind-v";
-	size_t cant;
-	int i;
-	status_t stado;
-
-
-	lala=split(cadena,',',&cant,&stado);
-	for(i=0;i<cant;i++){
-		printf("%s\n",lala[i]);
-
-	}
-
-	return 0;
-}
-
-
 char** split (const char *s, char delim, size_t *fields,status_t* st){
 
 	char **csvfields,**aux;
@@ -78,7 +60,7 @@ char** split (const char *s, char delim, size_t *fields,status_t* st){
 				csvfields[j]=&dup[i+1];
 				j++;
 			}
-			
+
 		}
 	}
 	*fields=n;
