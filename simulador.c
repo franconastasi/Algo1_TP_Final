@@ -9,9 +9,11 @@
 char** split (const char *s, char delim, size_t *fields,status_t* st);
 char* strdup (const char *str);
 
+status_t generarMensajes(size_t n, lista_t* l,sensor_t ** sens);
 
-
-
+status_t procesarMensajes(size_t m, lista_t* l);
+status_t procesarMensajeBIN(lista_t* l, FILE* fp);
+status_t procesarMensajeCSV(lista_t* l, FILE* fp);
 
 
 char** split (const char *s, char delim, size_t *cant_fields,status_t* st){
@@ -76,3 +78,36 @@ char* strdup (const char *str){
 	strcpy(str2,str);
 	return str2;
 }
+
+
+status_t generarMensajes(size_t n, lista_t* l,sensor_t ** sens, size_t n_sens){
+	size_t i,j;
+	for (i = 0; i < n; ++i){
+		j = rand() % n_sens;
+		return lista_insertar_final(l,SENSOR_adquirir_datos(sens[j]));
+	}
+}
+
+status_t procesarMensajes(size_t m, lista_t* l,formato_t fmt, FILE* fp){
+	size_t i;
+	status_t st;
+	status_t (*fn)(lista*l,FILE* fp)[]={
+		procesarMensajeBIN,
+		procesarMensajeCSV
+	};
+	
+	for(i = 0; i< m; i++){
+		if( ( st = (fn[fmt])(l,fp)) != ST_OK){
+			return st;
+		}
+	}
+}
+
+
+status_t procesarMensajeBIN(lista_t* l, FILE* fp){
+	/*TO DO: hacer la función BIN*/
+}
+status_t procesarMensajeCSV(lista_t* l, FILE* fp){
+	/*TO DO: hacer la función CSV*/
+}
+

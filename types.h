@@ -29,4 +29,9 @@ typedef enum {
 
 typedef unsigned char uchar;
 
+typedef enum{
+	BIN,
+	CSV
+}formato_t;
+
 #endif
