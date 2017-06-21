@@ -10,6 +10,10 @@ char** split (const char *s, char delim, size_t *fields,status_t* st);
 char* strdup (const char *str);
 
 
+
+
+
+
 char** split (const char *s, char delim, size_t *cant_fields,status_t* st){
 
 	char **csvfields,**aux;
