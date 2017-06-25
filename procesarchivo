@@ -3,7 +3,7 @@
 #define GPS_ID "GPS"
 
 
-crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensores){
+crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensores, FILE* ptrf_model){
 
   sensor_type_t id;
   int sub_id;
