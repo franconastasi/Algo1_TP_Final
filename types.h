@@ -1,11 +1,13 @@
 #ifndef TYPES__H
 #define TYPES__H
 
+typedef unsigned char uchar;
+
 
 typedef struct {
-	int id, sub_id;
 	size_t largo;
-	unsigned char * datos;
+	int id, sub_id;
+	uchar * datos;
 }mensaje_t;
 
 
@@ -24,10 +26,13 @@ typedef enum {
 typedef enum {
 	ST_OK,
 	ST_NO_MEM,
-	ST_NULL_POINTER
+	ST_NULL_POINTER,
+	ST_UNABLE_TO_WRITE_ON_FILE,
+	ST_UNABLE_TO_READ_FROM_FILE,
+	ST_INVALID_CANT_ARG,
+	ST_ARG_NOT_FOUND,
+	ST_INVALID_ARG_FMT
 }status_t;
-
-typedef unsigned char uchar;
 
 typedef enum{
 	BIN,

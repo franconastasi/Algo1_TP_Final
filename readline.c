@@ -31,7 +31,7 @@ status_t read_line (FILE* srcf,char** line){
 		return ST_NULL_POINTER;
 	}
 
-	if((*line)=(char*)calloc(INITSIZE,sizeof(char)))==NULL){
+	if((*line)=(char*)calloc(INITSIZE,sizeof(char))==NULL){
 		*line=NULL;
 		return ST_NO_MEM;
 	}

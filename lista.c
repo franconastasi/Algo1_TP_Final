@@ -1,6 +1,7 @@
 #include "types"
 #include <stdio.h>
 #include <stdlib.h>
+#include "cumunes.h"
 
 
 bool_t lista_esta_vacia(const lista_t *ptr){

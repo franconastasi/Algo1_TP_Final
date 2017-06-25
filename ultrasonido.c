@@ -2,32 +2,28 @@
 #include <time.h>
 #include "types.h"
 #include "sensor.h"
+#include "cumunes.h"
 
 
 
-status_t US_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr){
-	if (!sens || !param_ptr)
+status_t US_crear(sensor_t** sens,sensor_type_t id, int sub_id, double* param_ptr){
+	
+	status_t st;
+
+	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr)) != ST_OK )
 	{
-		return ST_OK;
-	}
-	if ( (*sens = (sensor_t*)calloc(1,sizeof(sensor_t))) == NULL )
-	{
-		return ST_NO_MEM;
+		return st;
 	}
 
-	(*sens)->id = tpe;
-	(*sens)->sub_id = sub_id;
-	(*sens)->params = param_ptr
+	if (  (st = SENSOR_set_adquisidora(*sens, &US_adquirir_datos )) != ST_OK )
+	{
+		return st;
+	}
 }
 
 void US_destruir(sensor_t** sens){
-	free( (*sens)->params );
-	(*sens)->params = NULL;
-	free(*sens );
-	*sens = NULL;
+	SENSOR_destruir(sens);
 }
-
-
 
 
 mensaje_t* US_adquirir_datos(sensor_t* sens){
@@ -43,10 +39,8 @@ mensaje_t* US_adquirir_datos(sensor_t* sens){
 	 */
 	mensaje->id=rand();
 	mensaje->sub_id=rand();
-	/*Como largo es de tipo size_t y su representración depende de donde se lo está implementadndo
-	supongo que tiene la menor implementación posible (osea char)
-	*/
-	mensaje->largo = (rand() % (sizeof(char)*8))
+	/*Como largo es size_t puede representar hasta un máximo de sizeof(size_t)*8 bits*/
+	mensaje->largo = (rand() % (sizeof(size_t)*8))
 
 	/*Se podría agregar los parámetros en el cálculo de los datos para que parezca mas real
 	aunque no debería cambiar en nada la simulación
