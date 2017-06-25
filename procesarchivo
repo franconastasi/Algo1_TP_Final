@@ -122,3 +122,25 @@ status_t obtener_params (char**params_array,double** params,size_t cant){
   }
   return ST_OK;
 }
+void destruir_arreglo_sensor(sensor_t*** arr_sensores,size_t *cant_sensores){
+  size_t i;
+
+  if(!arr_sensores || !cant_sensores)
+    return;
+
+  for(i=0;i<*cant_sensores;i++){
+    switch(((*arr_sensores)[i])->id){
+      case SENSOR_IMU:
+        IMU_destruir(&((*arr_sensores)[i]));
+
+      case SENSOR_GPS:
+        GPS_destruir(&((*arr_sensores)[i]));
+
+      case SENSOR_US:
+        US_destruir(&((*arr_sensores)[i]));
+    }
+  }
+  free(*arr_sensores);
+  *arr_sensores=NULL;
+  *cant_sensores=0;
+}
