@@ -2,15 +2,15 @@
 #include <time.h>
 #include "types.h"
 #include "sensor.h"
-#include "cumunes.h"
+#include "comunes.h"
 
 
 
-status_t US_crear(sensor_t** sens,sensor_type_t id, int sub_id, double* param_ptr){
-	
+status_t US_crear(sensor_t** sens,sensor_type_t id, int sub_id, double* param_ptr,size_t numparams){
+
 	status_t st;
 
-	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr)) != ST_OK )
+	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr,numparams)) != ST_OK )
 	{
 		return st;
 	}

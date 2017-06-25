@@ -11,7 +11,7 @@ int main(){
 	free(cadena);
 }
 
-status_t read_line (FILE* srcf,char** line){
+status_t read_line (FILE* srcf,char** line, bool_t* eof){
 
 	char *aux;
 	int c;
@@ -36,14 +36,18 @@ status_t read_line (FILE* srcf,char** line){
 		return ST_NO_MEM;
 	}
 
-	if((c=fgetc(srcf))=='\n' || c==COMMENT_CHAR ){
+	if((c=fgetc(srcf))=='\n' || c==COMMENT_CHAR){
 		(*line)=NULL;
-		return ST_COMMENT_CHAR;
+		return ST_OK;
+	}
+	if(c==EOF){
+		*eof=TRUE;
+		(*line)=NULL;
+		return  ST_OK;
 	}
 
 	(*line)[used_size]=c;
 	used_size++;
-
 
 	while(((c=fgetc(srcf)) != '\n') && (c != EOF)) {
 		if(used_size==alloc_size){
@@ -60,16 +64,14 @@ status_t read_line (FILE* srcf,char** line){
 		alloc_size+=CHOP_SIZE;
 	}
 
-
-	if(used_size==alloc_size){
-		if((aux=(char*)realloc(*line,sizeof(char)*(alloc_size+CHOP_SIZE)))==NULL){
-			*st=ST_NO_MEM;
-			free(*line);
-			(*line)=NULL;
-		}
+	if((aux=(char*)realloc(*line,sizeof(char)*(++used_size)) )==NULL){
+		*st=ST_NO_MEM;
+		free(*line);
+		(*line)=NULL;
+	}
 
 	(*line)=aux;
-	(*line)[size]='\0';
+	(*line)[used_size]='\0';
 
-	return ST_SUCCESS;
+	return ST_OK;
 }

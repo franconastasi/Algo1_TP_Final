@@ -5,7 +5,7 @@
 
 
 
-status_t SENSOR_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr){
+status_t SENSOR_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr,size_t numparams){
 	if (!sens || !param_ptr)
 	{
 		return ST_NULL_POINTER;
@@ -18,7 +18,8 @@ status_t SENSOR_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* par
 
 	(*sens)->id = tpe;
 	(*sens)->sub_id = sub_id;
-	(*sens)->params = param_ptr
+	(*sens)->params = param_ptr;
+	(*sens)->nparams = numparams;
 	return ST_OK;
 }
 

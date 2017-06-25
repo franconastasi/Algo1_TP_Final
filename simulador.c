@@ -7,6 +7,7 @@
 
 /*TO DO: 	escribir bien handle_error con todos los estado (hacerlo al final por las dudas de agregar más estados)
 			*/
+status_t split (const char *, char, size_t *,char***);
 
 
 int main(int argc, char const *argv[])
@@ -23,13 +24,13 @@ int main(int argc, char const *argv[])
 		return EXIT_FAILURE;
 	}
 
-	if ( (model_fp = fopen(model_filename,"rt")) == NULL ) 
+	if ( (model_fp = fopen(model_filename,"rt")) == NULL )
 	{
 		handle_error(ST_UNABLE_TO_OPEN_FILE);
 		return EXIT_FAILURE;
 	}
 
-	if ( (output_fp = fopen_fmt(output_filename,fmt)) == NULL ) 
+	if ( (output_fp = fopen_fmt(output_filename,fmt)) == NULL )
 	{
 		handle_error(ST_UNABLE_TO_OPEN_FILE);
 		return EXIT_FAILURE;
@@ -50,7 +51,7 @@ int main(int argc, char const *argv[])
 	mirar las funciones que arme generarmensaje y procesarmensaje
 
 
-	
+
 	**********************/
 
 
@@ -75,7 +76,7 @@ status_t validar_arg(int argc, const char* argv[], char* model_filename, *format
 	}
 	/* Las copio a cada variable*/
 	strcpy(model_filename,argv[model_pos]);
-	
+
 	if (*fmt = str_to_ftm(argv[ftm_pos]) == CANT_FMT){
 		return ST_INVALID_ARG_FMT;
 	}
@@ -119,9 +120,9 @@ FILE* fopen_fmt(char* filename, formato_t fmt){
 		if (!filename){
 			return NULL;
 		}
-		
+
 		switch(fmt){
-			case BIN: 
+			case BIN:
 				return fopen(filename,"wb")
 				/*tecnicamente el break no sería necesario;*/
 				break;
@@ -135,58 +136,52 @@ FILE* fopen_fmt(char* filename, formato_t fmt){
 
 
 
-char** split (const char *s, char delim, size_t *cant_fields,status_t* st){
+status_t split (const char *s, char delim, size_t *cant_fields,char*** csvfields){
 
-	char **csvfields,**aux;
+	char **aux;
 	int i,j=0,n=1;
 	char* dup;
 
-	if (cant_fields==NULL){
-		*st=ST_NULL_POINTER;
-		return NULL;
+
+	if (!cant_fields || !csvfields ){
+		return ST_NULL_POINTER;
 	}
 
 	if (s==NULL){
-		*st=ST_NULL_POINTER;
-		*fields=0;
-		return NULL;
+		*cant_fields=0;
+		return ST_NULL_POINTER;
 	}
 
 	if((dup=strdup(s))==NULL){
-		*st=ST_NO_MEM;
 		*cant_fields=0;
-		return NULL;
+		return ST_NO_MEM;
 	}
 
 	if((aux=(char**)calloc(n,sizeof(char*)))==NULL){
-		*st=ST_NO_MEM;
-		*fields=0;
-		return NULL;
+		*cant_fields=0;
+		return ST_NO_MEM;
 	}
-	csvfields=aux;
-	csvfields[j]=dup;
+	(*csvfields)=aux;
+	(*csvfields)[j]=dup;
 
 	for (i=0,j=1;dup[i];i++){
 		if (dup[i]==delim){
 			dup[i]='\0';
 			if((dup[i+1]!=delim && dup[i+1]!='\0')){
 
-				if((aux=(char**)realloc(csvfields,(++n)*sizeof(char*)))==NULL){
-					free(csvfields);
-					*st=ST_NO_MEM;
-					*fields=0;
-					return NULL;
+				if((aux=(char**)realloc((*csvfields),(++n)*sizeof(char*)))==NULL){
+					free((*csvfields));
+					*cant_fields=0;
+					return ST_NO_MEM;
 				}
-				csvfields=aux;
-				csvfields[j]=&dup[i+1];
+				(*csvfields)=aux;
+				(*csvfields)[j]=&dup[i+1];
 				j++;
 			}
-
 		}
 	}
 	*cant_fields=n;
-	*st=ST_OK;
-	return csvfields;
+	return ST_OK;
 }
 
 char* strdup (const char *str){
@@ -214,11 +209,11 @@ status_t procesarMensajes(size_t m, lista_t* l,formato_t fmt, FILE* fp){
 	size_t i;
 	status_t st;
 	nodo_t* nodo;
-	status_t (*fn[CANT_FUNC_PROC])(lista*l,FILE* fp)={ 
+	status_t (*fn[CANT_FUNC_PROC])(lista*l,FILE* fp)={
 		procesarMensajeBIN,
 		procesarMensajeCSV
 	};
-	
+
 	for(i = 0; i< m; i++){
 		if( ( st = (*fn[fmt])(l,fp)) != ST_OK){
 			return st;
@@ -239,7 +234,7 @@ status_t procesarMensajeBIN(lista_t* l, FILE* fp){
 	{
 		return ST_NULL_POINTER;
 	}
-	
+
 	if ( fwrite(LEXEM,sizeof(LEXEM),1,fp) != 1  )
 	{
 		return ST_UNABLE_TO_WRITE_ON_FILE;
@@ -269,7 +264,7 @@ status_t procesarMensajeCSV(lista_t* l, FILE* fp){
 	char FIN, delim;
 	int i;
 
-	FIN = SUFIX_END; 
+	FIN = SUFIX_END;
 	delim = CSV_DELIM;
 
 	if (!l || !fp)
@@ -278,7 +273,7 @@ status_t procesarMensajeCSV(lista_t* l, FILE* fp){
 	}
 
 	fprintf(fp, "%s%c%lu%c%i%c%i%c", LEXEM, delim, (*l)->largo, delim, (*l)->id, delim,(*l)->sub_id, delim);
-	
+
 	for (i = 0; i < (*l)->largo; ++i)
 	{
 		fprintf(fp, "%u%c", ((*l)->datos)[i], delim );
@@ -288,4 +283,3 @@ status_t procesarMensajeCSV(lista_t* l, FILE* fp){
 
 	return ST_OK;
 }
-

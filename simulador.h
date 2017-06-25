@@ -20,7 +20,7 @@
 
 
 
-char** split (const char *s, char delim, size_t *fields,status_t* st);
+status_t split (const char *, char, size_t *,char***);
 char* strdup (const char *str);
 
 status_t generarMensajes(size_t n, lista_t* l,sensor_t ** sens);

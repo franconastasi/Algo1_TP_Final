@@ -14,7 +14,7 @@ typedef struct {
 typedef enum{
 	SENSOR_IMU,
 	SENSOR_GPS,
-	SENSOR US
+	SENSOR_US
 }sensor_type_t;
 
 typedef enum {
@@ -32,7 +32,11 @@ typedef enum {
 	ST_INVALID_CANT_ARG,
 	ST_ARG_NOT_FOUND,
 	ST_INVALID_ARG_FMT,
-	ST_UNABLE_TO_OPEN_FILE
+	ST_UNABLE_TO_OPEN_FILE,
+	ST_INVALID_SUBID,
+	ST_INVALID_ID,
+	ST_INVALID_PARAMS,
+	ST_ERROR_LEER_MODELO,
 }status_t;
 
 typedef enum{

@@ -5,10 +5,10 @@
 
 
 
-status_t IMU_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr){
+status_t IMU_crear(sensor_t** sens,sensor_type_t tpe, int sub_id, double* param_ptr,size_t numparams){
 	status_t st;
 
-	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr)) != ST_OK )
+	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr,numparams)) != ST_OK )
 	{
 		return st;
 	}
