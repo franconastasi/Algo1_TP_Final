@@ -5,7 +5,7 @@
 #include "cumunes.h"
 #include "simulador.h"
 
-/*TO DO: 	escribir bien handle_erro con todos los estado (hacerlo al final por las dudas de agregar más estados)
+/*TO DO: 	escribir bien handle_error con todos los estado (hacerlo al final por las dudas de agregar más estados)
 			*/
 
 
@@ -14,12 +14,28 @@ int main(int argc, char const *argv[])
 	status_t st;
 	char* model_filename, output_filename;
 	formato_t fmt;
+	FILE* model_fp, output_fp;
 
-	if ((st = validar_cant_argumentos(argc,argv,model_filename,&fmt,output_filename)) != ST_OK)
+
+	if ((st = validar_arg(argc,argv,model_filename,&fmt,output_filename)) != ST_OK)
 	{
 		handle_error(st);
 		return EXIT_FAILURE;
 	}
+
+	if ( (model_fp = fopen(model_filename,"rt")) == NULL ) 
+	{
+		handle_error(ST_UNABLE_TO_OPEN_FILE);
+		return EXIT_FAILURE;
+	}
+
+	if ( (output_fp = fopen_fmt(output_filename,fmt)) == NULL ) 
+	{
+		handle_error(ST_UNABLE_TO_OPEN_FILE);
+		return EXIT_FAILURE;
+	}
+
+
 
 	/***********************
 	PARTE DEL CODIGO PARA PROCESAR EL ARCHIVO
@@ -99,6 +115,23 @@ formato_t str_to_ftm(char * str){
 	return i;
 }
 
+FILE* fopen_fmt(char* filename, formato_t fmt){
+		if (!filename){
+			return NULL;
+		}
+		
+		switch(fmt){
+			case BIN: 
+				return fopen(filename,"wb")
+				/*tecnicamente el break no sería necesario;*/
+				break;
+			case CSV:
+				return fopen(filename,"wt")
+				break;
+			default:
+				return NULL;
+		}
+	}
 
 
 
