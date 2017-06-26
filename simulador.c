@@ -443,11 +443,11 @@ status crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensor
   (*arr_sensores)=NULL;
 
   do{
-      if((st=read_line(ptrf_model,&model_line,&eof)!=ST_SUCCESS)
+      if((st=read_line(ptrf_model,&model_line,&eof)!=ST_OK)
         return ST_ERROR_LEER_MODELO;
       if((*model_line)==NULL)
         continue;
-      if((st=split(model_line,DELIM,&cant,&campos_model))!=ST_SUCCESS)
+      if((st=split(model_line,DELIM,&cant,&campos_model))!=ST_OK)
         return st;
       if((st=obtener_id(campos_model[ID_POS]),&id)!=ST_OK)
         return st;
@@ -499,7 +499,7 @@ status_t obtener_id(char* id_string,sensor_type_t *id){
   if (!id || !id_string ){
     return ST_NULL_POINTER;
   }
-  if (strcmp(id_string,IMU_ID)==0){/*IMU_ID  Y TODOS LOS XX_ID SON MACROS A DEFINIR*/
+  if (strcmp(id_string,IMU_ID)==0){
     *id=SENSOR_IMU;
     return ST_OK;
   }
