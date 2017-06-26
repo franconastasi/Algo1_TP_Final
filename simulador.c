@@ -163,17 +163,14 @@ FILE* fopen_fmt(char* filename, formato_t fmt){
 		}
 		switch(fmt){
 			case BIN:
-				return fopen(filename,"wb")
-				/*tecnicamente el break no sería necesario;*/
-				break;
+				return fopen(filename,"wb");
 			case CSV:
 				if(filename == STD_OUT_PARAM){
 					/* 	Esto puede parecer raro pero hice una prueba y si a una variable FILE* le asignas stdout (fp = stdout) y
 						llamas a fprintf (fprintf(fp;"%s\n"; "wubba lubba dub dub"))  lo imprime bien */
 					return stdout;
 				}else{
-					return fopen(filename,"wt")
-					break;
+					return fopen(filename,"wt");
 				}
 			default:
 				return NULL;
@@ -332,24 +329,6 @@ status_t procesarMensajeCSV(lista_t* l, FILE* fp){
 	return ST_OK;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Revisar esta función: st no está declarado?
-*/
-
-
 status_t read_line_modelo (FILE* srcf,char** line, bool_t* eof){
 
 	char *aux;
@@ -470,6 +449,8 @@ status crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensor
       }
       (*arr_sensores)[cant_sensores-1]=sensor;
       *cant_sensores++;
+      free(campos_model); 
+      campos_model =NULL;     
 
     } while (*eof==FALSE);
 
