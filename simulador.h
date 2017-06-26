@@ -23,6 +23,11 @@
 #define CANT_ITERACIONES 10
 #define MAX_CANT_MSG_GENERAR_POR_ITERACION 50
 
+#define IMU_ID "IMU"
+#define US_ID "US"
+#define GPS_ID "GPS"
+
+
 
 
 status_t split (const char *, char, size_t *,char***);
