@@ -1,4 +1,4 @@
-/*    https://github.com/franconastasi/Algo1_TP_Final    */ 
+/*    https://github.com/franconastasi/Algo1_TP_Final    */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -86,7 +86,7 @@ int main(int argc, char const *argv[])
 				default:
 					handle_error(st);
 					return EXIT_FAILURE;
-			} 
+			}
 		}
 	}
 	lista_destruir(&lista_msg, /*poner una función que destruya el nodo*/)
@@ -350,31 +350,22 @@ status_t procesarMensajeCSV(lista_t* l, FILE* fp){
 */
 
 
-status_t read_line (FILE* srcf,char** line, bool_t* eof){
+status_t read_line_modelo (FILE* srcf,char** line, bool_t* eof){
 
 	char *aux;
 	int c;
 	size_t alloc_size=INITSIZE, used_size=0;
 
-	if(line==NULL){
+	if(line==NULL)
 		return ST_NULL_POINTER;
-	}
-
-	if (st=NULL){
-		(*line)=NULL;
-		return ST_NULL_POINTER;
-	}
-
 	if (FILE==NULL){
 		(*line)=NULL;
 		return ST_NULL_POINTER;
 	}
-
 	if((*line)=(char*)calloc(INITSIZE,sizeof(char))==NULL){
 		*line=NULL;
 		return ST_NO_MEM;
 	}
-
 	if((c=fgetc(srcf))=='\n' || c==COMMENT_CHAR){
 		(*line)=NULL;
 		return ST_OK;
@@ -391,7 +382,7 @@ status_t read_line (FILE* srcf,char** line, bool_t* eof){
 	while(((c=fgetc(srcf)) != '\n') && (c != EOF)) {
 		if(used_size==alloc_size){
 			if((aux=(char*)realloc(*line,sizeof(char)*(alloc_size+CHOP_SIZE)))==NULL){
-				*st=ST_NO_MEM;
+				return ST_NO_MEM;
 				free(*line);
 				(*line)=NULL;
 			}
@@ -404,7 +395,7 @@ status_t read_line (FILE* srcf,char** line, bool_t* eof){
 	}
 
 	if((aux=(char*)realloc(*line,sizeof(char)*(++used_size)) )==NULL){
-		*st=ST_NO_MEM;
+		return ST_NO_MEM;
 		free(*line);
 		(*line)=NULL;
 	}
@@ -414,15 +405,6 @@ status_t read_line (FILE* srcf,char** line, bool_t* eof){
 
 	return ST_OK;
 }
-
-
-
-
-
-/* Revisar esta función: 	¿Porqué se hace el chequeo *model_line)==NULL?
-							SENSOR_IMU ? SENSOR_GPS ? SENSOR_US ? por algún motivo no usaste el enum?
-
-*/
 
 status crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensores, FILE* ptrf_model){
 
@@ -515,9 +497,8 @@ status_t obtener_id(char* id_string,sensor_type_t *id){
 }
 
 status_t obtener_subid (char*subid_string,int* sub_id){
-  if (!sub_id || !id_string ){
+  if (!sub_id || !id_string )
     return ST_NULL_POINTER;
-  }
 
   *sub_id=(int)strtod(campos_model[SUB_ID_POS],&endptr);
   if(*endptr != '\0')
@@ -565,5 +546,3 @@ void destruir_arreglo_sensor(sensor_t*** arr_sensores,size_t *cant_sensores){
   *arr_sensores=NULL;
   *cant_sensores=0;
 }
-
-
