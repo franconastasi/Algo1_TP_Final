@@ -358,7 +358,7 @@ status_t read_line_modelo (FILE* srcf,char** line, bool_t* eof){
 
 	if(line==NULL)
 		return ST_NULL_POINTER;
-	if (FILE==NULL){
+	if (!srcf || !eof){
 		(*line)=NULL;
 		return ST_NULL_POINTER;
 	}
