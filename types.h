@@ -26,6 +26,7 @@ typedef enum {
 typedef enum {
 	ST_OK,
 	ST_NO_MEM,
+	ST_ILLEGAL,
 	ST_NULL_POINTER,
 	ST_UNABLE_TO_WRITE_ON_FILE,
 	ST_UNABLE_TO_READ_FROM_FILE,

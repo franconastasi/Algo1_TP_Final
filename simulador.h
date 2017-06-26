@@ -11,12 +11,17 @@
 #define CANT_FUNC_PROC 2
 
 /*#define PREFIX_LEXEM {'H','O','U','S','E'}*/
+#define PREFIX_LEXEM_CSV "HOUSE"
 #define SUFIX_END 'D'
 #define CSV_DELIM ','
 
 #define CANT_FMT 2
 #define BIN_FMT_STR "bin"
 #define CSV_FMT_STR "csv"
+
+
+#define CANT_ITERACIONES 10
+#define MAX_CANT_MSG_GENERAR_POR_ITERACION 50
 
 
 
