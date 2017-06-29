@@ -1,4 +1,4 @@
-#include <stdlib>
+#include <stdlib.h>
 #include <time.h>
 #include "types.h"
 #include "sensor.h"
@@ -10,7 +10,7 @@ status_t US_crear(sensor_t** sens,sensor_type_t id, int sub_id, double* param_pt
 
 	status_t st;
 
-	if ( (st= SENSOR_crear(sens,id,sub_id,*param_ptr,numparams)) != ST_OK )
+	if ( (st= SENSOR_crear(sens,id,sub_id,param_ptr,numparams)) != ST_OK )
 	{
 		return st;
 	}
@@ -19,6 +19,7 @@ status_t US_crear(sensor_t** sens,sensor_type_t id, int sub_id, double* param_pt
 	{
 		return st;
 	}
+	return st;
 }
 
 void US_destruir(sensor_t** sens){
@@ -40,15 +41,15 @@ mensaje_t* US_adquirir_datos(sensor_t* sens){
 	mensaje->id=rand();
 	mensaje->sub_id=rand();
 	/*Como largo es size_t puede representar hasta un máximo de sizeof(size_t)*8 bits*/
-	mensaje->largo = (rand() % (sizeof(size_t)*8))
+	mensaje->largo = (rand() % (sizeof(size_t)*8));
 
 	/*Se podría agregar los parámetros en el cálculo de los datos para que parezca mas real
 	aunque no debería cambiar en nada la simulación
 	*/
-	mensaje_t->datos = (uchar*)malloc(sizeof(uchar)*mensaje->largo);
+	mensaje->datos = (uchar*)malloc(sizeof(uchar)*mensaje->largo);
 	for (i = 0; i < mensaje->largo; ++i)
 	{
-		mensaje_t->datos[i] = (rand() % (sizeof(uchar)*8))
+		(mensaje->datos)[i] = (rand() % (sizeof(uchar)*8));
 	}
 	return mensaje;
 

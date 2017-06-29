@@ -5,12 +5,11 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#include "cumunes.h"
+#include "comunes.h"
 #include "simulador.h"
 
-/*TO DO: 	escribir bien handle_error con todos los estado (hacerlo al final por las dudas de agregar más estados)
-			*/
-status_t split (const char *, char, size_t *,char***);
+/*TO DO: 	escribir bien handle_error con todos los estado (hacerlo al final por las dudas de agregar más estados()*/
+status_t split(const char *, char, size_t *,char***);
 
 
 int main(int argc, char const *argv[])
@@ -101,7 +100,7 @@ int main(int argc, char const *argv[])
 
 
 
-status_t validar_arg(int argc, const char* argv[], char* model_filename, *formato_t fmt ,char* output_filename){
+status_t validar_arg(int argc, const char* argv[], char* model_filename, formato_t* fmt ,char* output_filename){
 	int model_pos, ftm_pos, output_pos;
 
 	if (argc != CANT_ARG){
@@ -128,7 +127,7 @@ status_t validar_arg(int argc, const char* argv[], char* model_filename, *format
 }
 
 
-int obtener_pos(char* elem,int n_max_elem, char* str_array[]){
+int obtener_pos(char* elem,int n_max_elem, char* str_array[] ){
 	int i;
 
 	for (i = 0; i < n_max_elem; ++i)
@@ -141,7 +140,7 @@ int obtener_pos(char* elem,int n_max_elem, char* str_array[]){
 	return i;
 }
 
-formato_t str_to_ftm(char * str){
+formato_t str_to_ftm(char * str) {
 	int i;
 	char* ftm_strings[] = {
 		BIN_FMT_STR,
@@ -385,7 +384,7 @@ status_t read_line_modelo (FILE* srcf,char** line, bool_t* eof){
 	return ST_OK;
 }
 
-status crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensores, FILE* ptrf_model){
+status_t crear_arreglo_sensores_modelo(sensor_t***arr_sensores,size_t* cant_sensores, FILE* ptrf_model){
 
   sensor_type_t id;
   int sub_id;
@@ -481,7 +480,7 @@ status_t obtener_subid (char*subid_string,int* sub_id){
   if (!sub_id || !id_string )
     return ST_NULL_POINTER;
 
-  *sub_id=(int)strtod(campos_model[SUB_ID_POS],&endptr);
+  *sub_id=(int)strtod(subid_string,&endptr);
   if(*endptr != '\0')
     return ST_INVALID_SUBID;
 }
@@ -526,4 +525,5 @@ void destruir_arreglo_sensor(sensor_t*** arr_sensores,size_t *cant_sensores){
   free(*arr_sensores);
   *arr_sensores=NULL;
   *cant_sensores=0;
+  return;
 }

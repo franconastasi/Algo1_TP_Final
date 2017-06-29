@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+
 #include "types.h"
-#include "cumunes.h"
+#include "comunes.h"
 
 
 

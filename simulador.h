@@ -39,8 +39,8 @@ status_t procesarMensajeBIN(lista_t* l, FILE* fp);
 status_t procesarMensajeCSV(lista_t* l, FILE* fp);
 
 status_t validar_cant_argumentos(int);
-status_t validar_arg(int argc, const char* argv[], char* model_filename, *formato_t ftm ,char* output_filename);
-int obtener_pos(char* elem,int n_max_elem, char* str_array[])
+status_t validar_arg(int argc, const char* argv[], char* model_filename, formato_t* ftm ,char* output_filename);
+int obtener_pos(char* elem,int n_max_elem, char* str_array[]);
 formato_t str_to_ftm(char * str);
 
 FILE* fopen_fmt(char* filename, formato_t fmt);

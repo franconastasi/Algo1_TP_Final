@@ -11,15 +11,15 @@ typedef struct {
 }mensaje_t;
 
 
-typedef enum{
+typedef enum senssor{
 	SENSOR_IMU,
 	SENSOR_GPS,
 	SENSOR_US
 }sensor_type_t;
 
 typedef enum {
-	FALSE;
-	TRUE;
+	FALSE,
+	TRUE
 }bool_t;
 
 
