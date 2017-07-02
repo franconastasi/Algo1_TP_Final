@@ -7,13 +7,11 @@
 	ST_NO_MEM
 */
 
-
 #include "types.h"
 #include "sensor.h"
 
-status_t US_crear(sensor_t **,sensor_type_t,int,double*,size_t);
+status_t US_crear(sensor_t **, sensor_type_t, int, double *, size_t);
 void US_destruir(sensor_t **);
-mensaje_t* US_adquirir_datos(sensor_t*);
-
+mensaje_t* US_adquirir_datos(sensor_t *);
 
 #endif

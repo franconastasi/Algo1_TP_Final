@@ -1,12 +1,17 @@
 #include <stdio.h>
-#include "types.h"
 #include <stddef.h>
+#include "types.h"
+#include "comunes.h"
+#include "config.h"
+#include "language.h"
 
 
-void handleError(status_t st){
-	char *msg[] = {
+void handleError(status_t st)
+{
+	char *msg[] = 
+	{
 		MSG_NO_MEM,
 		MSG_NULL_POINTER
 	};
-	fprintf(stderr, "%s %s\n",MSG_ERROR_PREFIX, msg[st-1] );
+	fprintf(stderr, "%s %s\n", MSG_ERROR_PREFIX, msg[st-1]);
 }

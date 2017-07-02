@@ -1,29 +1,34 @@
 #ifndef TYPES__H
 #define TYPES__H
 
+#include <stdlib.h>
+
 typedef unsigned char uchar;
 
 
-typedef struct {
+typedef struct mensaje
+{
 	size_t largo;
 	int id, sub_id;
 	uchar * datos;
-}mensaje_t;
+} mensaje_t;
 
 
-typedef enum senssor{
+typedef enum sensor_type
+{
 	SENSOR_IMU,
 	SENSOR_GPS,
 	SENSOR_US
-}sensor_type_t;
+} sensor_type_t;
 
-typedef enum {
+typedef enum
+{
 	FALSE,
 	TRUE
-}bool_t;
+} bool_t;
 
-
-typedef enum {
+typedef enum
+{
 	ST_OK,
 	ST_NO_MEM,
 	ST_ILLEGAL,
@@ -38,11 +43,13 @@ typedef enum {
 	ST_INVALID_ID,
 	ST_INVALID_PARAMS,
 	ST_ERROR_LEER_MODELO,
-}status_t;
+	ST_LISTA_VACIA /* esta la agregué porque la usaban, pero habría que cambiarle el nombre */
+} status_t;
 
-typedef enum{
+typedef enum
+{
 	BIN,
 	CSV
-}formato_t;
+} formato_t;
 
 #endif

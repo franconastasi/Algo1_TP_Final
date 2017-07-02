@@ -2,6 +2,6 @@
 #define COMUNES__H
 
 #include "types.h"
-void handleError(status_t);
+void handle_error(status_t);
 
 #endif
