@@ -37,7 +37,7 @@ status_t lista_crear_nodo(nodo_t **nodo, void *dato)
 	return ST_OK;
 }
 
-void lista_destruir_nodo(nodo_t **nodo, void (*destruir_dato)(void *))
+void lista_destruir_nodo(nodo_t **nodo, void (*destruir_dato)(void **))
 {
 	if (nodo == NULL)
 	{
@@ -58,10 +58,9 @@ void lista_destruir_nodo(nodo_t **nodo, void (*destruir_dato)(void *))
 	(*nodo)->sig = NULL;
 	free(*nodo);
 	*nodo = NULL;
-	fprintf(stderr, "%s\n", "DESTRUYE NODO");
 }
 
-void lista_destruir(lista_t *pl, void (*destruir_dato)(void *))
+void lista_destruir(lista_t *pl, void (*destruir_dato)(void **))
 {
 
 	nodo_t *aux;
@@ -108,7 +107,7 @@ status_t lista_insertar_final(lista_t *pl, void *dato)
 	return ST_OK;
 }
 
-void pop_lista(lista_t *lista_ptr, void (*destruir_dato)(void *))
+void pop_lista(lista_t *lista_ptr, void (*destruir_dato)(void **))
 {
 	nodo_t *aux;
 	aux = *lista_ptr;

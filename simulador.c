@@ -378,7 +378,7 @@ status_t procesar_mensaje_CSV(mensaje_t *l, FILE *fp)
 		return ST_NULL_POINTER;
 	}
 	lexem = strdup(PREFIX_LEXEM_CSV);
-	fprintf(fp, "%s%c%u%c%i%c%i%c", lexem, CSV_DELIM, (l)->largo, CSV_DELIM, (l)->id, CSV_DELIM, (l)->sub_id, CSV_DELIM);
+	fprintf(fp, "%s%c%lu%c%u%c%i%c", lexem, CSV_DELIM, (l)->largo, CSV_DELIM, (l)->id, CSV_DELIM, (l)->sub_id, CSV_DELIM);
 
 	for (i = 0; i < (l)->largo; i++)
 	{
