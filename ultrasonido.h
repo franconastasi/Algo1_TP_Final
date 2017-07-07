@@ -1,12 +1,7 @@
 #ifndef ULTRASONIDO__H
 #define ULTRASONIDO__H
 
-/* Borrar este comentario a lo último, lo dejo para que sublime autocomplete
-	ST_SUCCESS,
-	ST_ILLEGAL,
-	ST_NO_MEM
-*/
-
+#include "comunes.h"
 #include "types.h"
 #include "sensor.h"
 

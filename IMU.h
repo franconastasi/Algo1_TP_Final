@@ -1,14 +1,10 @@
 #ifndef IMU__H
 #define IMU__H
 
+#include "comunes.h"
 #include "types.h"
 #include "sensor.h"
 
-/* Borrar este comentario a lo último, lo dejo para que sublime autocomplete
-	ST_SUCCESS,
-	ST_ILLEGAL,
-	ST_NO_SPACE
-*/
 
 
 status_t IMU_crear(sensor_t **, sensor_type_t, int, double *, size_t);
