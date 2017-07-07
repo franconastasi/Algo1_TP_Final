@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "types.h"
 
+#define CANT_TIPOS_SENSORES 3
+
 typedef struct sensor
 {
 	sensor_type_t id;
