@@ -11,7 +11,7 @@ typedef struct sensor
 {
 	sensor_type_t id;
 	int sub_id;
-	mensaje_t *(*adquirir_datos)(sensor_t*);
+	mensaje_t *(*adquirir_datos)(sensor*);
 	double* params;
 	size_t nparams;
 } sensor_t;
