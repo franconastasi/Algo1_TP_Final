@@ -80,7 +80,7 @@ int main(int argc, char const *argv[])
 	
 	for (n_iteraciones = 0; n_iteraciones < CANT_ITERACIONES; n_iteraciones++)
 	{
-		cant_msg_generar = rand() % (sizeof(size_t) * 8);
+		cant_msg_generar = rand() % MAX_CANT_MSG_GENERAR_POR_ITERACION;
 		if ((st = generar_mensajes(cant_msg_generar, &lista_msg, arr_sensores, n_sensores)) != ST_OK)
 		{
 			handle_error(st);
@@ -93,7 +93,7 @@ int main(int argc, char const *argv[])
 			return EXIT_FAILURE;
 		}
 		
-		cant_msg_procesar = rand() % (sizeof(size_t) * 8);
+		cant_msg_procesar = rand() % MAX_CANT_MSG_PROCESAR_POR_ITERACION;
 		if ((st = procesar_mensajes(cant_msg_procesar, &lista_msg, fmt, output_fp)) != ST_OK)
 		{
 			switch(st)

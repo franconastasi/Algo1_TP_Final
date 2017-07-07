@@ -42,7 +42,7 @@ mensaje_t *US_adquirir_datos(void)
 	mensaje->id = rand();
 	mensaje->sub_id = rand();
 
-	mensaje->largo = (rand() % (sizeof(size_t) * 8));
+	mensaje->largo = (rand() % MAX_CANT_DATOS);
 
 	if((mensaje->datos = (uchar *)malloc(sizeof(uchar) * mensaje->largo)) == NULL)
 	{
@@ -52,7 +52,7 @@ mensaje_t *US_adquirir_datos(void)
 
 	for (i = 0; i < mensaje->largo; i++)
 	{
-		(mensaje->datos)[i] = (rand() % (sizeof(uchar) * 8));
+		(mensaje->datos)[i] = (rand() % MAX_VALOR_DATO);
 	}
 	return mensaje;
 }
