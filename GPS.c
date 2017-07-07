@@ -28,7 +28,7 @@ void GPS_destruir(sensor_t **sens)
 	SENSOR_destruir(sens);
 }
 
-mensaje_t *GPS_adquirir_datos(sensor_t sens)
+mensaje_t *GPS_adquirir_datos(sensor_t *sens)
 {
 	size_t i;
 	mensaje_t *mensaje;
@@ -41,8 +41,8 @@ mensaje_t *GPS_adquirir_datos(sensor_t sens)
 	if((mensaje = (mensaje_t *)malloc(sizeof(mensaje_t))) == NULL)
 		return NULL;
 
-	mensaje->id = tipos_sensores_array[sens.id];
-	mensaje->sub_id = sens.sub_id;
+	mensaje->id = tipos_sensores_array[sens->id];
+	mensaje->sub_id = sens->sub_id;
 
 	mensaje->largo = (rand() % MAX_CANT_DATOS);
 

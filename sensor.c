@@ -58,7 +58,7 @@ mensaje_t *SENSOR_adquirir_datos(sensor_t *sens)
 {
 	if (sens && (sens->adquirir_datos))
 	{
-		return (sens->adquirir_datos)();
+		return (sens->adquirir_datos)(sens);
 	}
 	return NULL;
 }
