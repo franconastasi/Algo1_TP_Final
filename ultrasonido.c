@@ -30,17 +30,21 @@ void US_destruir(sensor_t **sens)
 }
 
 
-mensaje_t *US_adquirir_datos(void)
+mensaje_t *US_adquirir_datos(sensor_t *sens)
 {
 	size_t i;
 	mensaje_t *mensaje;
+	sensor_type_t tipos_sensores_array[CANT_TIPOS_SENSORES] ={
+		SENSOR_IMU,
+		SENSOR_GPS,
+		SENSOR_US
+	};
 	
-
 	if((mensaje = (mensaje_t *)malloc(sizeof(mensaje_t))) == NULL)
 		return NULL;
 
-	mensaje->id = rand();
-	mensaje->sub_id = rand();
+	mensaje->id = tipos_sensores_array[sens->id];
+	mensaje->sub_id = sens->sub_id;
 
 	mensaje->largo = (rand() % MAX_CANT_DATOS);
 
