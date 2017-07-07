@@ -1,0 +1,7 @@
+# Modelo del UGV: Rovertito
+IMU 1 12.3 4.56 7.8E-3 9E-6 100
+GPS 1
+#Ultrasonidos: distancia_mínima distancia_máxima error ruido
+US 1 0.1 6.5 0.01 0.0002
+US 2 0.1 6.5 0.01 0.0002
+US 3 0.1 6.5 0.01 0.0002

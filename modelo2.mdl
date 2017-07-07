@@ -1,0 +1,3 @@
+# Modelo del UGV: Rovertito
+IMU 1 12.3 4.56 7.8E-3 9E-6 100
+#funciones de lista que no usamos (status para destruir), dato datos, NULL o implicito, ingles español
