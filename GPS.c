@@ -36,7 +36,7 @@ mensaje_t *GPS_adquirir_datos(sensor_t sens)
 		SENSOR_IMU,
 		SENSOR_GPS,
 		SENSOR_US
-	}
+	};
 	
 	if((mensaje = (mensaje_t *)malloc(sizeof(mensaje_t))) == NULL)
 		return NULL;
