@@ -43,7 +43,7 @@ typedef enum
 	ST_INVALID_ID,
 	ST_INVALID_PARAMS,
 	ST_ERROR_LEER_MODELO,
-	ST_LISTA_VACIA /* esta la agregué porque la usaban, pero habría que cambiarle el nombre */
+	ST_LISTA_VACIA 
 } status_t;
 
 typedef enum

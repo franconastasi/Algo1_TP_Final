@@ -1,10 +1,9 @@
-/*    https://github.com/franconastasi/Algo1_TP_Final    */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include "types.h"
 #include "sensor.h"
 #include "comunes.h"
 #include "simulador.h"
@@ -57,9 +56,7 @@ int main(int argc, char const *argv[])
 		fclose(output_fp);
 		return EXIT_FAILURE;
 	}
-	/***********************
-	PARTE DEL CODIGO PARA PROCESAR EL ARCHIVO
-	**********************/
+	
 	
 	if((st = crear_arreglo_sensores_modelo(&arr_sensores, &n_sensores, model_fp)) != ST_OK )
 	{
@@ -70,11 +67,6 @@ int main(int argc, char const *argv[])
 		fclose(output_fp);
 		return EXIT_FAILURE;
 	}
-
-	/***********************
-	PARTE DEL CODIGO PARA HACER LA SIMULACIÓN
-	mirar las funciones que arme generarmensaje y procesarmensaje
-	**********************/
 
 	srand(time(NULL));
 	
@@ -372,13 +364,18 @@ status_t procesar_mensaje_CSV(mensaje_t *l, FILE *fp)
 {
 	char *lexem;
 	size_t i;
+    char* sensor_string[CANT_TIPOS_SENSORES] = {
+        IMU_ID,
+        GPS_ID,
+        US_ID
+    };
 
 	if (!l || !fp)
 	{
 		return ST_NULL_POINTER;
 	}
 	lexem = strdup(PREFIX_LEXEM_CSV);
-	fprintf(fp, "%s%c%lu%c%u%c%i%c", lexem, CSV_DELIM, (l)->largo, CSV_DELIM, (l)->id, CSV_DELIM, (l)->sub_id, CSV_DELIM);
+	fprintf(fp, "%s%c%lu%c%s%c%i%c", lexem, CSV_DELIM, (l)->largo, CSV_DELIM,  sensor_string[(l)->id] , CSV_DELIM, (l)->sub_id, CSV_DELIM);
 
 	for (i = 0; i < (l)->largo; i++)
 	{

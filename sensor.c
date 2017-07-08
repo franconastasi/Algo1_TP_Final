@@ -44,7 +44,7 @@ void SENSOR_destruir(sensor_t **sens)
 	*sens = NULL;
 }
 
-status_t SENSOR_set_adquisidora(sensor_t *sens, mensaje_t *(*fn)(void))
+status_t SENSOR_set_adquisidora(sensor_t *sens, mensaje_t *(*fn)(sensor_t*))
 {
 	if(!sens || !fn)
 	{
