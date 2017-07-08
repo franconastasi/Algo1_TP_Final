@@ -11,10 +11,10 @@ typedef struct sensor
 {
 	sensor_type_t id;
 	int sub_id;
-	mensaje_t *(*adquirir_datos)(sensor* s);
+	mensaje_t* (*adquirir_datos)(sensor*);
 	double* params;
 	size_t nparams;
-} sensor_t;
+}sensor_t;
 
 status_t SENSOR_crear(sensor_t **, sensor_type_t, int, double *, size_t);
 void SENSOR_destruir(sensor_t **);
